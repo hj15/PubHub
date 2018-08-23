@@ -18,8 +18,8 @@ import examples.pubhub.model.Tag;
 
 public class TagDAOImpl implements TagDAO{
 	
-	Connection connection = null;   //Our connection to the database
-	PreparedStatement stmt = null;  //Prepared statements to protect against SQL injections
+	Connection connection = null;   
+	PreparedStatement stmt = null; 
 	
 	/*-------------------------------------------------------------------------------------*/
 
@@ -104,16 +104,14 @@ public class TagDAOImpl implements TagDAO{
         }
 		
 		try {
-			connection = DAOUtilities.getConnection();   //Get our database connection from manager
+			connection = DAOUtilities.getConnection(); 
 			String sql = "INSERT INTO Book_tags VALUES (?,?)";
 			stmt = connection.prepareStatement(sql);
 			
 			stmt.setString(1, tag.getIsbn13());
 			stmt.setString(2, tag.getTagName());
 			
-			// If we were able to add our tag to the DB, we want to return true. 
-			// This if statement both executes our query, and looks at the return 
-			// value to determine how many rows were changed
+			
 			
 			if (stmt.executeUpdate() != 0)
                 return true;
@@ -132,7 +130,7 @@ public class TagDAOImpl implements TagDAO{
 	public Boolean removeTag(Tag tag) {
 		
 		try {
-			connection = DAOUtilities.getConnection();   //Get our database connection from manager
+			connection = DAOUtilities.getConnection();  
 			String sql = "DELETE FROM book_tags WHERE tag_name = ?";
 			stmt = connection.prepareStatement(sql);
 			
@@ -178,8 +176,6 @@ public class TagDAOImpl implements TagDAO{
 	
 	/*------------------------------------------------------------------------------------------------*/
 
-	// Closing all resources is important, to prevent memory leaks. 
-	// Ideally, you really want to close them in the reverse-order you open them
 	
         private void closeResources() {
             try {

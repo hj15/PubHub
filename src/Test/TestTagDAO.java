@@ -2,6 +2,7 @@ package Test;
 
 import examples.pubhub.dao.TagDAOImpl;
 import examples.pubhub.dao.TagDAO;
+import examples.pubhub.model.Book;
 import examples.pubhub.model.Tag;
 
 import java.util.List;
@@ -30,13 +31,20 @@ public class TestTagDAO {
 	    dao.removeTag(paper);
 	    dao.removeTag(wine);  */
 	    
+	    List<Book> bookList = dao.getAllBooksForTag("paper");
+	    
+	    for(int i = 0; i < bookList.size(); i++) {
+	    		Book b = bookList.get(i);
+	    		System.out.println(b);
+	    }
+	    
+	    /*
+		List<Tag> tagList = dao.getAllTagsForBook("1111111111111");
 
-		List<Tag> list = dao.getAllTagsForBook("1111111111111");
-
-		for (int i = 0; i < list.size(); i++){
-		      Tag t = list.get(i);
+		for (int i = 0; i < tagList.size(); i++){
+		      Tag t = tagList.get(i);
 		   System.out.println(t);
-		}
+		} */
 	}
 
 }

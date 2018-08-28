@@ -12,6 +12,14 @@
     <servlet-name>PublishBookServlet</servlet-name>
     <url-pattern>/PublishBook</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>SearchTags</servlet-name>
+    <servlet-class>examples.pubhub.servlets.SearchTags</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchTags</servlet-name>
+    <url-pattern>/SearchTags</url-pattern>
+  </servlet-mapping>
   <error-page>
     <error-code>404</error-code>
     <location>/notFoundError.jsp</location>

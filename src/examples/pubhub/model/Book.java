@@ -88,5 +88,11 @@ public class Book {
 		this.content = content;
 	}
 	
+	@Override
+	public String toString() {
+		return "ISBN: " + isbn13 + " | Title: " + title +
+				" | Author: " + author + " | Publish Date: " + publishDate +
+				" | Price: " + price;
+	}
 	
 }

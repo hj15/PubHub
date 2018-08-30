@@ -10,6 +10,7 @@ import java.util.List;
 public class TestTagDAO {
 
 	public static void main(String[] args) {
+		
 		TagDAO dao = new TagDAOImpl();
 
 	    String isbn = "1111111111111";
@@ -17,19 +18,23 @@ public class TestTagDAO {
 	    Tag book = new Tag(isbn, "book");
 	    Tag paper = new Tag(isbn, "paper");
 	    Tag wine = new Tag(isbn, "wine");
-
+	    
+	    /*
 	    dao.addTag(book);
 	    dao.addTag(paper);
 	    dao.addTag(wine);
 	    
-	    dao.updateTag(book, new Tag(isbn, "tablet"));
-
+	    dao.updateTag(book, new Tag(isbn, "tablet"));*/
+	    
+	    Tag tablet = new Tag(isbn, "tablet");
+	    
+	    dao.removeTag(tablet);
 	    
 	    
-	    /*
+	    
 	    dao.removeTag(book);
 	    dao.removeTag(paper);
-	    dao.removeTag(wine);  */
+	    dao.removeTag(wine);  
 	    
 	    List<Book> bookList = dao.getAllBooksForTag("paper");
 	    

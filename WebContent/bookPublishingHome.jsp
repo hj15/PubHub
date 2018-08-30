@@ -33,6 +33,8 @@
 					<td>Price:</td>
 					<td></td>
 					<td></td>
+					<td></td>
+					<td></td>
 				</tr>
 			</thead>
 			<tbody>
@@ -51,6 +53,14 @@
 						<td><form action="ViewBookDetails?isbn=${book.isbn13}" method="get">
 								<input type="hidden" name="isbn13" value="${book.isbn13}">
 								<button class="btn btn-primary">Details</button>
+							</form></td>
+						<td><form action="AddTagDetails?isbn=${book.isbn13}" method="get">
+								<input type="hidden" name="isbn13" value="${book.isbn13}">
+								<button class="btn btn-primary">Add Tags</button>
+							</form></td>
+						<td><form action="RemoveTagDetails?isbn=${book.isbn13}" method="get">
+								<input type="hidden" name="isbn13" value="${book.isbn13}">
+								<button class="btn btn-primary">Remove Tags</button>
 							</form></td>
 					</tr>
 				</c:forEach>

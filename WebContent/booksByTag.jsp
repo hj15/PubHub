@@ -19,7 +19,7 @@
 	</c:when>
 	</c:choose>
 	
-		<h1>PUBHUB <small>Books By Tag</small></h1>
+		<h1>PUBHUB <small>Books By Tag - ${tag }</small></h1>
 		<hr class="book-primary">
 		
 		<form action="BooksByTag" method="get" class="form-horizontal">

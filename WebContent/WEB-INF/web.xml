@@ -13,11 +13,11 @@
     <url-pattern>/PublishBook</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>SearchTags</servlet-name>
-    <servlet-class>examples.pubhub.servlets.SearchTags</servlet-class>
+    <servlet-name>SearchTagsServlet</servlet-name>
+    <servlet-class>examples.pubhub.servlets.SearchTagsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>SearchTags</servlet-name>
+    <servlet-name>SearchTagsServlet</servlet-name>
     <url-pattern>/SearchTags</url-pattern>
   </servlet-mapping>
   <error-page>

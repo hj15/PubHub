@@ -62,7 +62,7 @@ public class TagDAOImpl implements TagDAO{
 		
 		try {
 			connection = DAOUtilities.getConnection();
-			String sql = "SELECT * FROM book_tags bt JOIN Books b on bt.tag_name = bt.tag_name WHERE bt.tag_name = ?";
+			String sql = "SELECT * FROM book_tags bt JOIN Books b on bt.isbn_13 = b.isbn_13 WHERE bt.tag_name = ?";
 			stmt = connection.prepareStatement(sql);
 			
 			

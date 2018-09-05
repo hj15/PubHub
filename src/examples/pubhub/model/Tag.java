@@ -1,7 +1,18 @@
 package examples.pubhub.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="BOOK_TAGS")
 public class Tag {
+	
+	@Id
     protected String isbn13;
+	
+	@Column
     protected String tagName;
 
     public Tag(){

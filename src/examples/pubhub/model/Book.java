@@ -2,15 +2,31 @@ package examples.pubhub.model;
 
 import java.time.LocalDate;
 
-public class Book {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="BOOK")
+public class Book {
+	
+	@Id
 	private String isbn13;			// International Standard Book Number, unique
+	
+	@Column
 	private String title;
+	
+	@Column
 	private String author;
+	
+	@Column
 	private LocalDate publishDate;	// Date of publish to the website
 	
+	@Column
 	private double price;
 	
+	@Column
 	private byte[] content;
 
 	// Constructor used when no date is specified

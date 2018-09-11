@@ -33,16 +33,23 @@
     		<artifactId>spring-context</artifactId>
     		<version>5.0.8.RELEASE</version>
 	</dependency> 
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
 	<dependency>
-  		<groupId>org.hibernate</groupId>
-  		<artifactId>hibernate-agroal</artifactId>
-  		<version>5.3.6.Final</version>
-  		<type>pom</type>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-orm</artifactId>
+    		<version>5.0.8.RELEASE</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
 	<dependency>
-        <groupId>com.oracle</groupId>
-        <artifactId>ojdbc6</artifactId>
-        <version>11.2.04</version>
-    </dependency>
+    		<groupId>org.hibernate</groupId>
+    		<artifactId>hibernate-core</artifactId>
+    		<version>5.3.6.Final</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+	<dependency>
+    		<groupId>postgresql</groupId>
+    		<artifactId>postgresql</artifactId>
+   		<version>9.1-901-1.jdbc4</version>
+	</dependency>
   </dependencies>
 </project>

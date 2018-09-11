@@ -10,14 +10,13 @@ import javax.persistence.Table;
 public class Tag {
 	
 	@Id
-    protected String isbn13;
+    private String isbn13;
 	
 	@Column
-    protected String tagName;
+    private String tagName;
 
     public Tag(){
-        this.isbn13 = null;
-        this.tagName = null;
+        
     }
 
     public Tag(String isbn13, String tagName){

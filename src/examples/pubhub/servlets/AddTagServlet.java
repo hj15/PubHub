@@ -16,6 +16,7 @@ import examples.pubhub.utilities.DAOUtilities;
 /**
  * Servlet implementation class AddTagServlet
  */
+/*
 @WebServlet("/AddTag")
 public class AddTagServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -55,3 +56,4 @@ public class AddTagServlet extends HttpServlet {
 	}
 
 }
+*/

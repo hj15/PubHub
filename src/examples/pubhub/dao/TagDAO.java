@@ -12,7 +12,7 @@ import examples.pubhub.model.Tag;
 public interface TagDAO {
 	public List<Tag> getAllTagsForBook(String isbn);
 	public List<Book> getAllBooksForTag(String tag);
-	public Boolean addTag(Tag tag);
-	public Boolean removeTag(Tag tag);
-    public boolean updateTag(Tag oldTag, Tag newTag);
+	public void addTag(Tag tag);
+	public void removeTag(Tag tag);
+    public void updateTag(Tag oldTag, Tag newTag);
 }

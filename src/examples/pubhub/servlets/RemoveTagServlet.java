@@ -16,6 +16,7 @@ import examples.pubhub.utilities.DAOUtilities;
 /**
  * Servlet implementation class RemoveTagServlet
  */
+/*
 @WebServlet("/RemoveTag")
 public class RemoveTagServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -55,3 +56,4 @@ public class RemoveTagServlet extends HttpServlet {
 
 
 }
+*/

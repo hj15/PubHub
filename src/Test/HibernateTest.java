@@ -1,35 +1,20 @@
 package Test;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import examples.pubhub.config.Config;
+import examples.pubhub.dao.TagDAO;
 import examples.pubhub.model.Tag;
 
 public class HibernateTest {
 
 	public static void main(String[] args) {
-		StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-		SessionFactory sessionFactory = null;
+		ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
+		TagDAO tagDAO = (TagDAO)context.getBean(TagDAO.class);
 		
-		try {
-			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-		}
-		catch (Exception e){
-			System.out.println("could not create connection!");
-			e.printStackTrace();
-			// The registry would be destroyed by SessionFactory, but we had trouble building 
-			// SessionFactory so destroy it manually
-			StandardServiceRegistryBuilder.destroy(registry);
-		}
+		Tag tag = new Tag("1111111111111", "programming");
 		
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.save(new Tag("1111111111111", "programming"));
-		session.save(new Tag("1111111111111", "java"));
-		session.save(new Tag("1111111111111", "enterprise"));
-		session.getTransaction().commit();
+		System.out.println(tag);
 	}	
 }

@@ -28,6 +28,10 @@ public class Book {
 	
 	@Column
 	private byte[] content;
+	
+	public Book () {
+		
+	}
 
 	// Constructor used when no date is specified
 	public Book(String isbn, String title, String author, byte[] content) {
@@ -47,14 +51,6 @@ public class Book {
 		this.content = content;
 	}
 	
-	// Default constructor
-	public Book() {
-		this.isbn13 = null;
-		this.title = null;
-		this.author = null;
-		this.publishDate = LocalDate.now();
-		this.content = null;
-	}
 	
 	public String getIsbn13() {
 		return isbn13;

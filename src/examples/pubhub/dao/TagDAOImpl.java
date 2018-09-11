@@ -1,11 +1,15 @@
 package examples.pubhub.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import examples.pubhub.model.Book;
 import examples.pubhub.utilities.DAOUtilities;
 import examples.pubhub.dao.TagDAO;
@@ -15,183 +19,86 @@ import examples.pubhub.model.Tag;
 /**
  * Implementation for the TagDAO, responsible for querying the database for Tag objects.
  */
-
+@Repository
+@Transactional
 public class TagDAOImpl implements TagDAO{
 	
-	Connection connection = null;   
-	PreparedStatement stmt = null; 
+	private SessionFactory sessionFactory;
 	
-	/*-------------------------------------------------------------------------------------*/
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
 	@Override
 	public List<Tag> getAllTagsForBook(String isbn) {
 		
-		List<Tag> tags = new ArrayList();
+		Session session = sessionFactory.openSession();
 		
-		try {
-			connection = DAOUtilities.getConnection();
-			String sql = "SELECT * FROM book_tags bt JOIN Books b on bt.isbn_13 = b.isbn_13 WHERE bt.isbn_13 = ?";
-			stmt = connection.prepareStatement(sql);
+		Query query = session.createQuery("SELECT bt.isbn, b.isbn" + "book_tags bt JOIN books b" + "ON bt.isbn = b.isbn" + "WHERE bt.isbn13 = :isbn");
+
+		ArrayList<Tag> tags = (ArrayList<Tag>) query.list();
 			
-			
-			stmt.setString(1, isbn);
-			
-			ResultSet rs = stmt.executeQuery();
-			
-			while(rs.next()) {
-				Tag tag = new Tag();	
-				
-				tag.setTagName(rs.getString("tag_name"));
-				tag.setIsbn13(rs.getString("isbn_13"));
-				
-				tags.add(tag);
-			}
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			closeResources();
-		}
-		
 		return tags;
 	}
 
+	/*------------------------------------------------------------------------------------------------*/
+	
 	@Override
 	public List<Book> getAllBooksForTag(String tag) {
 		
-		List<Book> books = new ArrayList();
 		
-		try {
-			connection = DAOUtilities.getConnection();
-			String sql = "SELECT * FROM book_tags bt JOIN Books b on bt.isbn_13 = b.isbn_13 WHERE bt.tag_name = ?";
-			stmt = connection.prepareStatement(sql);
-			
-			
-			stmt.setString(1, tag);
-			
-			ResultSet rs = stmt.executeQuery();
-			
-			while(rs.next()) {
-				Book book = new Book();
+		Session session = sessionFactory.openSession();
+		
+		Query query = session.createQuery("SELECT bt.isbn, b.isbn" + "book_tags bt JOIN books b" + "ON bt.isbn = b.isbn" + "WHERE bt.tagName = :tag");
 
-				book.setIsbn13(rs.getString("isbn_13"));
-				book.setAuthor(rs.getString("author"));
-				book.setTitle(rs.getString("title"));
-				book.setPublishDate(rs.getDate("publish_date").toLocalDate());
-				book.setPrice(rs.getDouble("price"));
-				book.setContent(rs.getBytes("content"));
-				
-				books.add(book);
-				
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			closeResources();
-		}
-		
+		ArrayList<Book> books = (ArrayList<Book>) query.list();
+			
 		return books;
 	}	
 	
-	@Override
-	public Boolean addTag(Tag tag) {
-        List<Tag> tags = getAllTagsForBook(tag.getIsbn13());
-        
-        for(int i = 0; i < tags.size(); i++) {
-        		if(tags.get(i).getTagName().equals(tag.getTagName())) {
-        			System.out.print("Tag already added to book!");
-        			return false;
-        		}
-        }
-		
-		try {
-			connection = DAOUtilities.getConnection(); 
-			String sql = "INSERT INTO Book_tags VALUES (?,?)";
-			stmt = connection.prepareStatement(sql);
-			
-			stmt.setString(1, tag.getIsbn13());
-			stmt.setString(2, tag.getTagName());
-			
-			
-			
-			if (stmt.executeUpdate() != 0)
-                return true;
-            else
-                return false;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            closeResources();
-        }
-    }
-
-	@Override
-	public Boolean removeTag(Tag tag) {
-		
-		try {
-			connection = DAOUtilities.getConnection();  
-			String sql = "DELETE FROM book_tags WHERE tag_name = ?";
-			stmt = connection.prepareStatement(sql);
-			
-			stmt.setString(1, tag.getTagName());
-			
-			 if (stmt.executeUpdate() != 0)
-	                return true;
-	            else
-	                return false;
-
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	            return false;
-	        } finally {
-	            closeResources();
-	        }
-		
-	    }
+	/*------------------------------------------------------------------------------------------------*/
 	
 	@Override
-    public boolean updateTag(Tag oldTag, Tag newTag) {
-        try {
-            connection = DAOUtilities.getConnection();
-            String sql = "UPDATE Book_Tags SET tag_name=? WHERE tag_name=? AND isbn_13=?";
-            stmt = connection.prepareStatement(sql);
-
-            stmt.setString(1, newTag.getTagName());
-            stmt.setString(2, oldTag.getTagName());
-            stmt.setString(3, newTag.getIsbn13());
-
-            if (stmt.executeUpdate() != 0)
-                return true;
-            else
-                return false;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            closeResources();
-        }
+	public void addTag(Tag tag) {
+		
+		List<Tag> tags = getAllTagsForBook(tag.getIsbn13());
+		
+		for(int i = 0; i < tags.size(); i++) {
+    		if(tags.get(i).getTagName().equals(tag.getTagName())) {
+    			System.out.print("Tag already added to book!");
+    			}
+    		else {
+    			Session session = sessionFactory.openSession();
+    			Query query = session.createQuery("INSERT INTO book_tags");
+    			}
+		}
     }
 	
 	/*------------------------------------------------------------------------------------------------*/
 
+	@Override
+	public void removeTag(Tag tag) {
+		
+		Session session = sessionFactory.openSession();
+		
+		Query query = session.createQuery("DELETE book_tags WHERE tagName = :tag.getTagName");
+		
+	    }
 	
-        private void closeResources() {
-            try {
-                if (stmt != null)
-                    stmt.close();
-            } catch (SQLException e) {
-                System.out.println("Could not close statement!");
-                e.printStackTrace();
-            }
-
-            try {
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException e) {
-                System.out.println("Could not close connection!");
-                e.printStackTrace();
-            }
-        }
+	/*------------------------------------------------------------------------------------------------*/
+	
+	@Override
+    public void updateTag(Tag oldTag, Tag newTag) {
+		
+		Session session = sessionFactory.openSession();
+		
+		Query query = session.createQuery("UPDATE book_tags SET tagName = :newTag WHERE tagName = :oldTag " + "AND isbn = :newTag.getIsbn13");	
     }
+}
+	
+       
+   

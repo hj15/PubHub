@@ -15,7 +15,7 @@ import javax.servlet.http.Part;
 import examples.pubhub.dao.BookDAO;
 import examples.pubhub.model.Book;
 import examples.pubhub.utilities.DAOUtilities;
-
+/*
 @MultipartConfig // This annotation tells the server that this servlet has
 					// complex data other than forms
 // Notice the lack of the @WebServlet annotation? This servlet is mapped the old
@@ -104,3 +104,4 @@ public class PublishBookServlet extends HttpServlet {
 	}
 
 }
+*/

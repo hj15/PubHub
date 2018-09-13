@@ -8,10 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="BOOK")
+@Table(name="book")
 public class Book {
 	
 	@Id
+	@Column(name="isbn_13")
 	private String isbn13;			// International Standard Book Number, unique
 	
 	@Column

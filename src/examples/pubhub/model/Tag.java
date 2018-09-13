@@ -6,13 +6,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="BOOK_TAGS")
+@Table(name="book_tags")
 public class Tag {
 	
 	@Id
+	@Column(name="isbn_13")
     private String isbn13;
 	
-	@Column
+	@Column(name="tag_name")
     private String tagName;
 
     public Tag(){

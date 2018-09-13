@@ -15,19 +15,19 @@ public class Book {
 	@Column(name="isbn_13")
 	private String isbn13;			// International Standard Book Number, unique
 	
-	@Column
+	@Column(name="title")
 	private String title;
 	
-	@Column
+	@Column(name="author")
 	private String author;
 	
-	@Column
+	@Column(name="publish_date")
 	private LocalDate publishDate;	// Date of publish to the website
 	
-	@Column
+	@Column(name="price")
 	private double price;
 	
-	@Column
+	@Column(name="content")
 	private byte[] content;
 	
 	public Book () {

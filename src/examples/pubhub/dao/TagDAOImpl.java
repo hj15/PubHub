@@ -53,7 +53,7 @@ public class TagDAOImpl implements TagDAO{
 		
 		Session session = sessionFactory.openSession();
 		
-		Query query = session.createQuery("SELECT bt.isbn, b.isbn" + "book_tags bt JOIN books b" + "ON bt.isbn = b.isbn" + "WHERE bt.tagName = :tag");
+		Query query = session.createQuery("SELECT bt.isbn, b.isbn " + "book_tags bt JOIN books b " + "ON bt.isbn = b.isbn " + "WHERE bt.tagName = :tag");
 
 		ArrayList<Book> books = (ArrayList<Book>) query.list();
 			

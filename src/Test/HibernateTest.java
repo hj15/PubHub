@@ -15,6 +15,8 @@ public class HibernateTest {
 		
 		Tag tag = new Tag("1111111111111", "programming");
 		
+		tagDAO.addTag(tag);
+		
 		System.out.println(tag);
 	}	
 }

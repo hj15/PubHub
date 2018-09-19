@@ -39,6 +39,12 @@
     		<artifactId>spring-orm</artifactId>
     		<version>5.0.8.RELEASE</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+	<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-jdbc</artifactId>
+   		<version>5.0.9.RELEASE</version>
+	</dependency>
 	<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
 	<dependency>
     		<groupId>org.hibernate</groupId>
